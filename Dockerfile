@@ -15,4 +15,4 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     cd gnn_tracking && \
     git checkout v23.12.0 && \
     cd environments && \
-    micromamba create --name gnn --file default.yml
+    micromamba create --name gnn --file default.yml -y
