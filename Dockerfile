@@ -4,7 +4,7 @@ USER root
 RUN apt-get update && \
     apt-get upgrade -qq -y && \
     apt-get install -qq -y --no-install-recommends \
-    git  \
+    git \
     wget && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
@@ -17,6 +17,7 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     git checkout v23.12.0 && \
     cd environments && \
     micromamba create --name gnn --file default.yml -y && \
+    micromamba activate gnn
     pip install -e '.[testing,dev]' && \
     cd ../src/ && \
     git clone https://github.com/gnn-tracking/tutorials.git
