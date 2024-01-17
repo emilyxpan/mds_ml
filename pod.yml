@@ -5,15 +5,26 @@ metadata:
 spec:
   containers:
   - name: gpu-container
+#    image: condaforge/mambaforge:latest
     image: gitlab-registry.nrp-nautilus.io/aaportel/gnn-tracking:latest
     command: ["sh", "-c", "echo 'Im a new pod' && sleep infinity"]
     resources:
       limits:
-        memory: 12Gi
+        memory: 32Gi
         cpu: "2"
         nvidia.com/gpu: "1"
       requests:
-        memory: 12Gi
-        cpu: "1"
+        memory: 32Gi
+        cpu: "2"
         nvidia.com/gpu: "1"
-
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: nvidia.com/gpu.product
+            operator: In
+            values:
+            - NVIDIA-A40
+            - NVIDIA-RTX-A6000
+            - Quadro-RTX-8000
