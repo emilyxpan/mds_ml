@@ -17,6 +17,14 @@ spec:
         memory: 32Gi
         cpu: "2"
         nvidia.com/gpu: "1"
+    volumeMounts:
+        - mountPath: /gnntrackingvol
+          name: gnntrackingvol
+  restartPolicy: Never
+  volumes:
+    - name: gnntrackingvol
+      persistentVolumeClaim:
+        claimName: gnntrackingvol
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -28,3 +36,5 @@ spec:
             - NVIDIA-A40
             - NVIDIA-RTX-A6000
             - Quadro-RTX-8000
+
+
