@@ -4,7 +4,7 @@ USER root
 RUN apt-get update && \
     apt-get upgrade -qq -y && \
     apt-get install -qq -y --no-install-recommends \
-    git && \
+    git  \
     wget && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
