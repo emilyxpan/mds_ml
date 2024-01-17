@@ -19,3 +19,10 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     micromamba create --name gnn --file default.yml -y && \
     cd ../src/ && \
     git clone https://github.com/gnn-tracking/tutorials.git
+
+USER root
+RUN fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+USER $NB_USER
+CMD [ "bash" ]

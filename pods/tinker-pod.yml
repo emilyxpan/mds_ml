@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aa-pod
+spec:
+  containers:
+  - name: cpu-container
+    image: condaforge/mambaforge:latest
+#    image: gitlab-registry.nrp-nautilus.io/aaportel/gnn-tracking:latest
+    command: ["sh", "-c", "echo 'Im a new pod' && sleep infinity"]
+    resources:
+      limits:
+        memory: 8Gi
+        cpu: "4"
+      requests:
+        memory: 8Gi
+        cpu: "4"
+    volumeMounts:
+        - mountPath: /gnntrackingvol
+          name: gnntrackingvol
+  restartPolicy: Never
+  volumes:
+    - name: gnntrackingvol
+      persistentVolumeClaim:
+        claimName: gnntrackingvol
+
+
