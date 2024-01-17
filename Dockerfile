@@ -17,7 +17,7 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     git checkout v23.12.0 && \
     cd environments && \
     micromamba create --name gnn --file default.yml -y && \
-    micromamba activate gnn
+    micromamba activate gnn && \
     pip install -e '.[testing,dev]' && \
     cd ../src/ && \
     git clone https://github.com/gnn-tracking/tutorials.git
