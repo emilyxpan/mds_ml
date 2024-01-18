@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.5.6
+FROM gitlab-registry.nrp-nautilus.io/prp/jupyter-stack/prp:latest
 
 USER root
 RUN apt-get update && \
@@ -16,13 +16,7 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     cd gnn_tracking && \
     git checkout v23.12.0 && \
     cd environments && \
-    micromamba create --name gnn --file default.yml -y && \
+    mamba create --name gnn --file default.yml -y && \
     cd ../src/ && \
     git clone https://github.com/gnn-tracking/tutorials.git
 
-USER root
-RUN fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-USER $NB_USER
-CMD [ "bash" ]
