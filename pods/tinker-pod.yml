@@ -5,8 +5,8 @@ metadata:
 spec:
   containers:
   - name: cpu-container
-    image: condaforge/mambaforge:latest
-#    image: gitlab-registry.nrp-nautilus.io/aaportel/gnn-tracking:latest
+    # image: condaforge/mambaforge:latest
+    image: gitlab-registry.nrp-nautilus.io/aaportel/gnn-tracking:latest
     command: ["sh", "-c", "echo 'Im a new pod' && sleep infinity"]
     resources:
       limits:
