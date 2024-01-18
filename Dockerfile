@@ -16,7 +16,7 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     cd gnn_tracking && \
     git checkout v23.12.0 && \
     cd environments && \
-    mamba create --name gnn --file default.yml -y && \
+    mamba create -f default.yml -y && \
     cd ../src/ && \
     git clone https://github.com/gnn-tracking/tutorials.git
 
