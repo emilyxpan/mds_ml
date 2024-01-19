@@ -51,7 +51,7 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     cd environments && \
     mamba env create -n gnn -f default.yml -y && \
     cd .. && \
-    pip3 install -e '.[testing,dev]' && \
+    #pip3 install -e '.[testing,dev]' && \
     cd src && \
     git clone https://github.com/gnn-tracking/tutorials.git
 
