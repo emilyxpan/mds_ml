@@ -16,11 +16,11 @@ spec:
         memory: 8Gi
         cpu: "4"
     volumeMounts:
-        - mountPath: /gnntrackingvol
-          name: gnntrackingvol
+        - mountPath: /home/jovyan/data
+          name: data
   restartPolicy: Never
   volumes:
-    - name: gnntrackingvol
+    - name: data
       persistentVolumeClaim:
         claimName: gnntrackingvol
 
