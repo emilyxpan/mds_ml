@@ -11,7 +11,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
     
-USER $NB_USER
+#USER $NB_USER
 RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     cd gnn_tracking && \
     git checkout v23.12.0 && \
