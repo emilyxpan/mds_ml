@@ -11,7 +11,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
     
-#USER $NB_USER
+USER $NB_USER
 RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     cd gnn_tracking && \
     git checkout v23.12.0 && \
@@ -21,4 +21,12 @@ RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
     pip3 install -e '.[testing,dev]' && \
     cd src && \
     git clone https://github.com/gnn-tracking/tutorials.git
+
+
+USER root
+RUN fix-permissions "/home/${NB_USER}"
+
+USER $NB_USER
+CMD [ "bash" ]
+
 
