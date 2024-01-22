@@ -21,4 +21,12 @@ spec:
         memory: 32Gi
         cpu: "2"
         nvidia.com/gpu: "1"
+    volumeMounts:
+      - mountPath: /mdsmlvol
+        name: mdsmlvol
+  restartPolicy: Never
+  volumes:
+    - name: mdsmlvol
+      persistentVolumeClaim:
+        claimName: mdsmlvol
   restartPolicy: Never
