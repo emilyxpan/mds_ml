@@ -3,11 +3,19 @@ kind: Pod
 metadata:
   name: aa-pod
 spec:
+  securityContext:
+    fsGroup: 100
   containers:
   - name: gpu-container
-#    image: condaforge/mambaforge:latest
     image: gitlab-registry.nrp-nautilus.io/aaportel/gnn-tracking:latest
-    command: ["/bin/bash", "-c", "echo 'Im a new pod' && sleep infinity"]
+    command: ["/bin/bash", "-c"]
+    args:
+      - |
+        source /opt/conda/etc/profile.d/conda.sh &&
+        conda activate gnn &&
+        cd gnn_tracking &&
+        pip3 install -e '.[testing,dev]' &&
+        sleep infinity
     resources:
       limits:
         memory: 32Gi
@@ -18,8 +26,8 @@ spec:
         cpu: "2"
         nvidia.com/gpu: "1"
     volumeMounts:
-        - mountPath: /gnntrackingvol
-          name: gnntrackingvol
+      - mountPath: /gnntrackingvol
+        name: gnntrackingvol
   restartPolicy: Never
   volumes:
     - name: gnntrackingvol
@@ -36,5 +44,3 @@ spec:
             - NVIDIA-A40
             - NVIDIA-RTX-A6000
             - Quadro-RTX-8000
-
-
