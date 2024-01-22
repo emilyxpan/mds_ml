@@ -3,6 +3,8 @@ LABEL maintainer="Javier Duarte <jduarte@ucsd.edu>"
 
 USER $NB_USER
 ENV USER=${NB_USER}
+
+# Update and install necessary packages
 RUN sudo apt-get update && \
     sudo apt-get upgrade -qq -y && \
     sudo apt-get install -qq -y --no-install-recommends \
@@ -13,13 +15,8 @@ RUN sudo apt-get update && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo rm -rf /tmp/*
 
-RUN git clone https://github.com/gnn-tracking/gnn_tracking.git && \
-    cd gnn_tracking && \
-    git checkout v23.12.0 && \
-    cd environments && \
-    mamba env create -n gnn -f default.yml -y && \
-    cd .. && \
-    cd src && \
-    git clone https://github.com/gnn-tracking/tutorials.git
-
-RUN fix-permissions /home/$NB_USER
+RUN mamba create --name mlllp --no-default-packages -y
+ENV PATH /opt/conda/envs/mlllp/bin:$PATH
+RUN mamba install -n mlllp pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
+RUN mamba install -n mlllp pyg -c pyg -y
+RUN mamba install -n mlllp uproot matplotlib jupyterlab -c conda-forge -y
