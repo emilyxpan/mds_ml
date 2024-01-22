@@ -7,14 +7,10 @@ spec:
     fsGroup: 100
   containers:
   - name: gpu-container
-    image: gitlab-registry.nrp-nautilus.io/aaportel/gnn-tracking:latest
+    image: gitlab-registry.nrp-nautilus.io/aaportel/mds-ml:latest
     command: ["/bin/bash", "-c"]
     args:
       - |
-        source /opt/conda/etc/profile.d/conda.sh &&
-        conda activate gnn &&
-        cd gnn_tracking &&
-        pip3 install -e '.[testing,dev]' &&
         sleep infinity
     resources:
       limits:
@@ -25,22 +21,4 @@ spec:
         memory: 32Gi
         cpu: "2"
         nvidia.com/gpu: "1"
-    volumeMounts:
-      - mountPath: /gnntrackingvol
-        name: gnntrackingvol
   restartPolicy: Never
-  volumes:
-    - name: gnntrackingvol
-      persistentVolumeClaim:
-        claimName: gnntrackingvol
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: nvidia.com/gpu.product
-            operator: In
-            values:
-            - NVIDIA-A40
-            - NVIDIA-RTX-A6000
-            - Quadro-RTX-8000

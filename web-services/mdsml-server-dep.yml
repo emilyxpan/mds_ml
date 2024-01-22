@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gnntracking-server-dep 
+  name: mdsml-server-dep 
   labels:
-    run: gnntrackingserver
+    run: mdsmlserver
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: gnntrackingserver
+      run: mdsmlserver
   template:
     metadata: 
       labels:
-        run: gnntrackingserver
+        run: mdsmlserver
     spec:
       containers:
-      - name: gnntrackingserver
+      - name: mdsmlserver
         image: python:3 
         resources:
            limits:
@@ -24,15 +24,15 @@ spec:
            requests:
              memory: 1Mi
              cpu: 10m
-        workingDir: /gnntrackingvol
+        workingDir: /mdsmlvol
         volumeMounts:
-        - mountPath: /gnntrackingvol
-          name: gnntrackingvol
+        - mountPath: /mdsmlvol
+          name: mdsmlvol
         command: ["python", "-m", "http.server"] 
       volumes:
-      - name: gnntrackingvol
+      - name: mdsmlvol
         persistentVolumeClaim:
-          claimName: gnntrackingvol
+          claimName: mdsmlvol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
