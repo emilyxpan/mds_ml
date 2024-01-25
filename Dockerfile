@@ -19,4 +19,4 @@ RUN mamba create --name mlllp --no-default-packages -y
 ENV PATH /opt/conda/envs/mlllp/bin:$PATH
 RUN mamba install -n mlllp pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
 RUN mamba install -n mlllp pyg -c pyg -y
-RUN mamba install -n mlllp uproot matplotlib jupyterlab -c conda-forge -y
+RUN mamba install -n mlllp uproot_methods uproot pandas tqdm numpy awkward matplotlib jupyterlab -c conda-forge -y
