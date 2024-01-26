@@ -15,8 +15,4 @@ RUN sudo apt-get update && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo rm -rf /tmp/*
 
-RUN mamba create --name mlllp --no-default-packages -y
-ENV PATH /opt/conda/envs/mlllp/bin:$PATH
-RUN mamba install -n mlllp pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
-RUN mamba install -n mlllp pyg -c pyg -y
-RUN mamba install -n mlllp uproot_methods uproot pandas tqdm numpy awkward matplotlib jupyterlab -c conda-forge -y
+RUN mamba create --name mlllp pytorch torchvision torchaudio pyg numpy=1.19.5 pandas awkward=0.* uproot-methods tqdm jupyterlab pytables pytorch-cluster -c pytorch -c conda-forge -c pyg -y
