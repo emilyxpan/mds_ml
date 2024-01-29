@@ -15,4 +15,4 @@ RUN sudo apt-get update && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo rm -rf /tmp/*
 
-RUN mamba create --name mlllp pytorch torchvision torchaudio pyg numpy=1.19.5 pandas awkward=0.* uproot-methods tqdm jupyterlab pytables pytorch-cluster -c pytorch -c conda-forge -c pyg -y
+RUN mamba create --name mlllp pytorch torchvision torchaudio pyg numpy pandas awkward uproot tqdm jupyterlab pytables pytorch-cluster matplotlib -c pytorch -c conda-forge -c pyg -y
